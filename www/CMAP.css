@@ -1,0 +1,29 @@
+.hcluster-body {
+    display: block;
+}
+
+.upload-body {
+    width: 1200px;
+    height: auto;
+    display: block;
+
+}
+
+.summary-body {
+    width: 800px;
+    height: auto;
+}
+
+.summary > b {
+    display: block;
+    font-size: larger;
+}
+
+.tab-body {
+    width: 600px;
+    height: auto;
+}
+
+.control-label {
+    width: 100%;
+}

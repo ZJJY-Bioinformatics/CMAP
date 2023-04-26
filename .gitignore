@@ -1,0 +1,8 @@
+.Rproj.user
+.Rhistory
+.RData
+.DS_Store
+vignettes/*.html
+vignettes/*.R
+data/mp_rare.rda
+data/treeda.rds
