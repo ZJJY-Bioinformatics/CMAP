@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# CMAP: CALM-base Microbiome Analysis Platform <img src="www/logo1.png" height="140" align="right" />
+# CMAP: CALM-base Microbiome Analysis Platform <img src="www/logo_git.png" height="140" align="right" />
 
 `CMAP` is an interactive online website designed to help researchers
 without a bioinformatics background quickly analyze microbiome data. It
