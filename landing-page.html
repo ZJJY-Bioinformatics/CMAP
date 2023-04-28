@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
+
+
+<!-- TOP OF HOMEPAGE - BANNER -->
+<div class = "hero">
+   <div class = "hero-inner">
+      <h1>Welcome to the CMAP</h1>
+      <h2>OneITStore provides computing resources support.</h2>
+      <button class = "hero-button" onclick="$('li:eq(6) a').tab('show');" role="button">About us <i class="fa-solid fa-circle-info"></i></button>
+     <!-- <button class = "hero-button" onclick="$('li:eq(4) a').tab('show');" role="button" id = "explore">Explore indicators <i class="fa-solid fa-magnifying-glass"></i></button> -->
+      
+     <!--  {guide_button} Note: This is an R object - see UI/server scripts -->
+      
+   </div>
+</div>
+
+<!-- MAIN FEATURES -->
+<div class = "grey-container">
+
+   <div class = "container-inner-contents" id = "tab-buttons">
+     <!-- Link to profile summary tab-->
+
+            <a onclick="$('li:eq(2) a').tab('show');" role="button" class = "featured-item">
+               <div class="features-text-section">
+                  <div class="icon-box">
+                     <i class="fa fa-bacterium fa-3x"></i>
+                  </div>
+                  <h3>16S rRNA</h3>
+                  <p>Identify and compare bacterial taxa in different samples based on their relative abundances</p>
+                  <div class="fa fa-chevron-right" aria-hidden="true"></div>
+               </div>
+            </a>
+
+      <!-- Link to trend tab-->
+
+            <a onclick="$('li:eq(4) a').tab('show');" role="button" class = "featured-item">
+               <div class="features-text-section">
+                  <div class="icon-box">
+                     <i class="fa fa-bacteria fa-3x"></i>
+                  </div>
+                  <h3>Metagenomics</h3>
+                  <p>Metagenomic taxonomy composition analysis, input is MetaPhlAn output files</p>
+                  <div class="fa fa-chevron-right" aria-hidden="true"></div>
+               </div>
+            </a>
+
+      <!-- Link to rank tab-->
+            <a onclick="$('li:eq(5) a').tab('show');" role="button" class = "featured-item">
+               <div class="features-text-section">
+                  <div class="icon-box">
+                     <i class="fa fa-dna fa-3x"></i>
+                  </div>
+                  <h3>Metagenomics</h3>
+                  <p>Metagenomic gene function analysis, input is HUMAnN 3.0 output files</p>
+                  <div class="fa fa-chevron-right" aria-hidden="true"></div>
+               </div>
+            </a>
+
+      <!-- Link to inequalities tab-->
+            <a onclick="$('li:eq(4) a').tab('show');" role="button" class = "featured-item">
+               <div class="features-text-section">
+                  <div class="icon-box">
+                     <i class="fa-solid fa-cubes-stacked fa-3x"></i>
+                  </div>
+                  <h3>Metabolomics</h3>
+                  <p>Under construction</p>
+                  <div class="fa fa-chevron-right" aria-hidden="true"></div>
+               </div>
+            </a>
+
+      <!-- Link to data table tab-->
+            <a onclick="$('li:eq(4) a').tab('show');" role="button" class = "featured-item">
+               <div class="features-text-section">
+                  <div class="icon-box">
+                     <i class="fas fa-align-center fa-3x"></i>
+                  </div>
+                  <h3>Transcriptome</h3>
+                  <p>Under construction</p>
+                  <div class="fa fa-chevron-right" aria-hidden="true"></div>
+               </div>
+            </a>
+      </div>
+   </div>
+
+
+   <!-- WHATS NEW/INDICATOR UPDATES -->
+<div class = "grey-container">
+   <div class = "container-inner-contents">
+     <!-- Links to schedule/latest updates -->
+      <div class = "white-box" id = "ind-updates-section">
+         <h3>Tutorial</h3>
+         <hr>
+         <div class = white-box-inner>
+            <h4>16S rRNA</h4>
+            <p>Click below for the 16S analysis tutorial.</p>
+            <button class = "button" onclick="$('li:eq(2) a').tab('show');" role="button">View 16S tutorial</button>  
+            <hr>
+            <h4>Metagenomics</h4>
+            <p>Click below for the Metagenomics analysis tutorial.</p>
+            <button class = "button" onclick="$('li:eq(4) a').tab('show');" role="button">Taxonomy composition</button>  
+         </div>
+      </div>
+      <!-- Links to new indicators/features in the dashboard -->
+      <div class = "white-box" id = "whats-new-section">
+         <h3>What's new</h3>
+         <hr>
+         <div class = "white-box-inner">
+            <h4>Homepage design [2023-04-27]</h4>
+            <p>Our homepage has been re-designed to ensure increased compliance with accessibility guidelines.</a>. 
+            </p>
+            <hr>
+            <h4>Added Metagenomics analysis modules [2023-04-07]</h4>
+            <p>We are adding the metagenomics analysis module, where the species analysis module is similar to the existing 16S analysis module, and the gene function analysis module will be available soon.
+            </p>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<!-- BOTTOM SECTION: ADDITIONAL LINKS -->
+<div class = "phs-purple-container">
+   <div class = "container-inner-contents" id = "further-links-section">
+      <div class = "links-item">
+ <!-- links to ways of other website -->
+         <h3>Stay in touch</h3>
+         <a href="mailto:nyzhoulang@gmail.com" target="_blank">Contact us <i class="fas fa-envelope"></i></a>
+         <a href="http://www.elabmed.cn/" target="_blank">Division of Laboratory Medicine</a>
+      </div>
+            <!-- links to scotpho github repositories and geography/population lookups -->
+      <div class = "links-item">
+         <h3>Source Code</h3>
+         <a href="https://github.com/ZJJY-Bioinformatics/CMAP" target="_blank">Github <i class = "fab fa-github fa-1x"></i></a>
+      </div>
+   </div>
+</div>

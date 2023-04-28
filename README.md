@@ -4,10 +4,10 @@
 
 `CMAP` is an interactive online website designed to help researchers
 without a bioinformatics background quickly analyze microbiome data. It
-includes a mature 16S data analysis module and a metagenomic analysis
+includes a mature 16S data analysis module and a Metagenomic analysis
 module that is currently under development.
 
-For details, please visit <http://www.cmap-zjyy.com:10548/>
+For details, please click <http://www.cmap-zjyy.com:10548/>
 
 ## :hammer: Analysis modules
 
@@ -16,7 +16,6 @@ ToDo
 ## :runner: Author
 
 -   [Lang Zhou](https://github.com/nyzhoulang) Creator & Maintainer
--   [Li Zhan](https://github.com/SMUZhanLi) Creator
 -   [Jiaxuang Wang](https://github.com/wangjiaxuan666) Contributor
 
 **ZJJY-Bioinformatics** <https://github.com/ZJJY-Bioinformatics>
@@ -24,6 +23,13 @@ ToDo
 **Microbiome Medicine Center, Division of Laboratory Medicine, Zhujiang
 Hospital, Southern Medical University, Guangzhou, Guangdong province,
 China**
+
+-   [Li Zhan](https://github.com/SMUZhanLi) Creator
+
+**YuLab** <https://yulab-smu.top/>
+
+**Department of Bioinformatics, School of Basic Medical Sciences,
+Southern Medical University**
 
 ## :bulb: Guide Videos
 
