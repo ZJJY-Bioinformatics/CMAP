@@ -11,7 +11,7 @@ sidebar_metagenomics <- dashboardSidebar(
         )),
         id = "tab",
         menuItem(
-            text = "Home",
+            text = "Tutorial",
             tabName = "home_meta",
             icon = icon("fas fa-house")
         ),

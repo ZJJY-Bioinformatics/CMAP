@@ -59,7 +59,7 @@ sidebar <- dashboardSidebar(
         )),
         id = "tab",
         menuItem(
-            text = "Home",
+            text = "Tutorial",
             tabName = "home",
             icon = icon("fas fa-house")
         ),
@@ -161,18 +161,34 @@ page_16S <-  shinydashboardPlus::dashboardPage(
 )
 
 
-
-
 #——————————————————————————————————————————————————————————————————#    
 ui <- tagList(
-    # useShinyjs(),
-    #includeCSS("www/CMAP.css"),
+    useShinyjs(),
+    #includeCSS("www/spinner_style.css"),
+    
     add_busy_spinner(spin = "fulfilling-bouncing-circle",
                      color = '#2980b9',
                      position = "top-right", 
                      margins = c(450,950)),
     
-    navbarPage("Microbiome Analysis Platform",
+    navbarPage(title = "CALM-based Microbiome Analysis Platform",
+               header = tags$head(
+                   # sourcing css style sheet 
+                   includeCSS("www/styles.css"),
+                   
+                   # include scotpho icon in web browser
+                   HTML("<html lang='en'>")
+                   # tags$link(rel = "shortcut icon", 
+                   #           href = "favicon_scotpho.ico"), 
+                   # 
+                   # # include google analytics scripts
+                   # includeScript("google-analytics.js"), # GA 3 
+                   # HTML('<script async src="https://www.googletagmanager.com/gtag/js?id=G-KE1C59RLNS"></script>'),
+                   # includeScript("gtag.js") # Google analytics 4 
+                   
+               ),
+               
+               
                tags$style(HTML("
                .navbar .navbar-header {float: left;}
                .navbar .navbar-nav {float: right;}
@@ -188,6 +204,18 @@ ui <- tagList(
                .navbar {margin-bottom: 0;}
                   ")),
                windowTitle = "CMAP-Microbiome Analysis Platform",
+               collapsible = TRUE,
+               tabPanel(
+                   div(
+                       div(class="fa fa-home", role = "navigation"), "Home"), # wrap in div for screenreader / accessibility purposes 
+                   value = "home", # tab ID
+                   #use_cicerone(), # guided tour
+                   htmlTemplate("landing-page.html" # html file containing landing page contents
+                                # variables defined in landing-page.html file to be built in Rshiny.
+                                #latest_updates_button = actionButton('btn_indicator_updates', "View recent updates", class = "button") #,
+                                #see_more_button = actionButton("jump_to_life_exp", "View life expectancy by SIMD", class = "button"),
+                                #guide_button = actionButton("guide", "Need help? Take a guided tour", class = "hero-button")
+                   )),
                tabPanel(title = "16S rRNA", 
                         page_16S,
                         icon = icon("bacterium")),

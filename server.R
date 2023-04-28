@@ -1,5 +1,4 @@
 server <- function(input, output, session) {
-    
     mpse <- upload_data_mod("upload")
     observe({
         req(mpse)
