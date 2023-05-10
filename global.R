@@ -19,17 +19,7 @@ library(rstatix)
 #add
 library(tidyverse)
 
-#library(bs4Dash)
-#library(shinyBS)
-#library(MicrobiotaProcess)
-#library(phyloseq)
-#library(gghalves)
-#library(dplyr)
-#library(picante)
-#library(ggside)
-#library(Maaslin2) 
-#library(ggupset) 
-#library(ggtree)
+
 
 options(shiny.maxRequestSize = 30*1024^2)
 alpha_index <- c("Observe", "Chao1", "ACE", "Shannon", "Simpson", "Pielou")

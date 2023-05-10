@@ -44,6 +44,8 @@ server <- function(input, output, session) {
         buglist_beta_hcluster_mod("buglist_hcluster",buglist_mpse())
         buglist_tSNE_mod("buglist_tsne",buglist_mpse())
     })
+    #other tools
+    psm_mod("psm")
 }
 
 shinyServer(server)

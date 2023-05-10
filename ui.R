@@ -21,6 +21,7 @@ source("tsne.R")
 source("diff_barplot.R")
 source("alpha_mul_index.R")
 source("adonis.R")
+source("psm.R")
 #mateG buglist files----------------------
 source("buglist_tSNE.R")
 source("buglist_beta_hcluster.R")
@@ -66,9 +67,10 @@ sidebar <- dashboardSidebar(
         menuItem(
             text = "Data Processing",
             icon = icon("fas fa-file"),
-            menuSubItem("Upload Data", tabName = "upload",icon = icon("angle-double-right", verify_fa = FALSE)),
-            menuSubItem("Rarefaction", tabName = "rarefy",icon = icon("angle-double-right", verify_fa = FALSE)),
-            menuSubItem("Meta Data Filter", tabName = "filter",icon = icon("angle-double-right", verify_fa = FALSE))
+            menuSubItem("Upload Data (EssentialStep1)", tabName = "upload",icon = icon("angle-double-right", verify_fa = FALSE)),
+            menuSubItem("Rarefaction (EssentialStep2)", tabName = "rarefy",icon = icon("angle-double-right", verify_fa = FALSE)),
+            menuSubItem("Meta Data Filter (EssentialStep3)", tabName = "filter",icon = icon("angle-double-right", verify_fa = FALSE)),
+            menuSubItem("PSM (Skippable)", tabName = "psm",icon = icon("angle-double-right", verify_fa = FALSE))
         ),
         menuItem(
             "Alpha(α) Diversity",
@@ -147,7 +149,8 @@ body <- dashboardBody(
         tabItem(tabName = "tsne", tSNE_ui("tsne")),
         tabItem("diff_bar", diff_barplot_ui("diff_bar")),
         tabItem("a_mul_index", alpha_mul_index_ui("a_mul_index")),
-        tabItem("adonis", adonis_all_ui("adonis"))
+        tabItem("adonis", adonis_all_ui("adonis")),
+        tabItem("psm", psm_ui("psm"))
     )
 )
 

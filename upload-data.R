@@ -34,7 +34,7 @@ upload_data_ui <- function(id) {
                    
             ),
             column(8,
-                   shinyjs::hidden(
+                   #shinyjs::hidden(
                        div(id = "hiddenbox",
                            shinydashboardPlus::box(
                                width = NULL,
@@ -45,7 +45,7 @@ upload_data_ui <- function(id) {
                                verbatimTextOutput(ns("mp_print"))
                            )
                        )
-                   )
+                   #)# close hidden
             )
         )
         

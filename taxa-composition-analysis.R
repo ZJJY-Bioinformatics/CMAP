@@ -364,6 +364,21 @@ feature_composition_ui <- function(id) {
                        actionButton(ns("btn"), "Submit")
                    ),
                    tabBox(width = NULL,
+                          tabPanel(h5("Graphics Options"),
+                                   prettyCheckbox(
+                                       inputId = ns("results.subtitle"),
+                                       label = "results subtitle",
+                                       value = FALSE,
+                                       status = "danger",
+                                       shape = "curve"
+                                   ),
+                                   selectInput(inputId = ns('plot.type'),
+                                               label = 'Plot type',
+                                               choices = c('only boxplots' = "box",
+                                                           "only violin" = "violin",
+                                                           "boxviolin" = "boxviolin")
+                                   )
+                          ),
                           tabPanel(
                               h5("Color"),
                               fluidRow(
@@ -521,6 +536,9 @@ feature_composition_mod <- function(id, mpse) {
                     
                     if(length(color_input) != ncolors) {
                         p <- grouped_ggbetweenstats(mp_comp(),
+                                                    plot.type = input$plot.type,
+                                                    bf.message = FALSE,
+                                                    results.subtitle = input$results.subtitle,
                                                     x = !!sym(group), 
                                                     y = RelAbundanceBySample, 
                                                     grouping.var = label, 
@@ -528,6 +546,9 @@ feature_composition_mod <- function(id, mpse) {
                         
                     }else{
                         p <- grouped_ggbetweenstats(mp_comp(),
+                                                    plot.type = input$plot.type,
+                                                    bf.message = FALSE,
+                                                    results.subtitle = input$results.subtitle,
                                                     x = !!sym(group), 
                                                     y = RelAbundanceBySample, 
                                                     grouping.var = label, 
