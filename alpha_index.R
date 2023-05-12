@@ -234,10 +234,6 @@ alpha_index_mod <- function(id, mpse) {
                     select(!!sym(group)) %>% unique #It is a tibble
                 
                 #Partition type 2
-                
-                
-                
-                
                 if(color_content[[1]] %>% is.numeric) {#continuous vector don't call color pal.
                     return(p)
                 } else {
@@ -261,112 +257,11 @@ alpha_index_mod <- function(id, mpse) {
                             scale_color_manual(values = color_input) +
                             scale_fill_manual(values = color_input)
 
-                    }
-                    
-                    # if(length(color_input) != ncolors) {
-                    #     p <- grouped_ggbetweenstats(tbl,
-                    #                                 x = !!sym(group),
-                    #                                 y = value,
-                    #                                 plot.type = input$box_style,
-                    #                                 grouping.var = Alpha,
-                    #                                 type = test,
-                    #                                 results.subtitle = input$subtitle,
-                    #                                 centrality.plotting = FALSE,
-                    #                                 pairwise.display = "s"
-                    #     )
-                    # }else{
-                    #     p <- grouped_ggbetweenstats(tbl,
-                    #                                 x = !!sym(group),
-                    #                                 y = value,
-                    #                                 plot.type = input$box_style,
-                    #                                 grouping.var = Alpha,
-                    #                                 type = test,
-                    #                                 results.subtitle =input$subtitle,
-                    #                                 centrality.plotting = FALSE,
-                    #                                 pairwise.display = "s",
-                    #                                 ggplot.component = list(
-                    #                                     scale_color_manual(values = color_input)
-                    #                                 )
-                    #     )
-                    # }
-                }
-                
-                
-                
-                
-                
-                
-                
+                    }#close else 2
+                }#close else 1
                 return(p)
-            })
-            
-            
-            # p_alpha_index <- reactive({
-            #     req(inherits(mp_alpha(), "MPSE"))
-            #     input$btn
-            #     group <- isolate({input$group})
-            #     index <- isolate({input$index})
-            #     # fac <- isolate({as.numeric(input$factor)})
-            #     test <- isolate({input$test})
-            #     type <- isolate({input$type})
-            #     fac <- unique(mp_extract_sample(mpse)[[group]])
-            #     # validate(need(fac >= 2,
-            #     #          "Please select a group with 2 (or >2) different levels."))
-            # 
-            #     tbl <- mp_alpha() %>%
-            #         mp_extract_sample() %>%
-            #         select(c(group, index)) %>%
-            #         tidyr::pivot_longer(
-            #             cols = !!index,
-            #             names_to = "Alpha")
-            # 
-            #     if (is.numeric(tbl[[group]]) && type == "continuous") {#continuous vector don't call color pal.
-            #         p <- grouped_ggscatterstats(tbl,
-            #                                     x = !!sym(group),
-            #                                     y = value,
-            #                                     grouping.var = Alpha,
-            #                                     type = test,
-            #                                     results.subtitle =FALSE,
-            #                                     centrality.plotting = FALSE)
-            #     } else {
-            #         color_content <- mpse %>% mp_extract_sample %>%
-            #             select(!!sym(group)) %>% unique #It is a tibble
-            # 
-            #         ncolors <- color_content[[1]] %>% length #length of group
-            #         color_input <- lapply(seq(ncolors), function (i){
-            #             input[[paste0("colors",i)]]
-            #         }) %>% unlist #calling input color by length of group
-            # 
-            #         if(length(color_input) != ncolors) {
-            #             p <- grouped_ggbetweenstats(tbl,
-            #                                         x = !!sym(group),
-            #                                         y = value,
-            #                                         plot.type = input$box_style,
-            #                                         grouping.var = Alpha,
-            #                                         type = test,
-            #                                         results.subtitle = input$subtitle,
-            #                                         centrality.plotting = FALSE,
-            #                                         pairwise.display = "s"
-            #             )
-            #         }else{
-            #             p <- grouped_ggbetweenstats(tbl,
-            #                                         x = !!sym(group),
-            #                                         y = value,
-            #                                         plot.type = input$box_style,
-            #                                         grouping.var = Alpha,
-            #                                         type = test,
-            #                                         results.subtitle =input$subtitle,
-            #                                         centrality.plotting = FALSE,
-            #                                         pairwise.display = "s",
-            #                                         ggplot.component = list(
-            #                                             scale_color_manual(values = color_input)
-            #                                             )
-            #                                         )
-            #         }
-            #     }
-            #     return(p)
-            # })
-            
+            })#reactive
+
             #Modify color
             color_list <- reactive({
                 req(mp_alpha())

@@ -171,8 +171,10 @@ ui <- tagList(
     
     add_busy_spinner(spin = "fulfilling-bouncing-circle",
                      color = '#2980b9',
-                     position = "top-right", 
-                     margins = c(450,950)),
+                     position = "bottom-right",
+                     #position = "top-right", 
+                     #margins = c(450,950)
+                     ),
     
     navbarPage(title = "CALM-based Microbiome Analysis Platform",
                header = tags$head(

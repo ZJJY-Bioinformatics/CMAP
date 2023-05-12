@@ -78,6 +78,7 @@ upload_data_mod <- function(id) {
           library(ggtreeExtra)
           library(tidyr)
           library(Rtsne)
+          library(cowplot)
       #}
       })
       

@@ -12,6 +12,7 @@ psm_ui <- function(id) {
                        collapsible = TRUE,
                        fileInput(ns("meta"), "Upload meta file (.txt |.csv |.xls |.xlsx)",
                                  accept = c(
+                                     ".txt",
                                      "text/csv",
                                      "text/tab-separated-values",
                                      "application/vnd.ms-excel",
@@ -98,13 +99,13 @@ psm_mod <- function(id) {
             ns <- session$ns
             
             #add PSM-20230506
-            library(MatchIt)
-            library(optmatch)
-            library(Matching)
-            library(rgenoud)
-            library(Rglpk)
-            library(readxl)
-            library(readr)
+            # require(MatchIt)
+            # require(optmatch)
+            # require(Matching)
+            # require(rgenoud)
+            # require(Rglpk)
+            # require(readxl)
+            # require(readr)
             
             data <- reactiveVal(NULL)
             observeEvent(input$meta, {
