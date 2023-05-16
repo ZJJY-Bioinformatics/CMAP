@@ -99,13 +99,13 @@ psm_mod <- function(id) {
             ns <- session$ns
             
             #add PSM-20230506
-            # require(MatchIt)
-            # require(optmatch)
-            # require(Matching)
-            # require(rgenoud)
-            # require(Rglpk)
-            # require(readxl)
-            # require(readr)
+            require(MatchIt)
+            require(optmatch)
+            require(Matching)
+            require(rgenoud)
+            require(Rglpk)
+            require(readxl)
+            require(readr)
             
             data <- reactiveVal(NULL)
             observeEvent(input$meta, {

@@ -23,10 +23,18 @@ taxa_composition_ui <- function(id) {
                        ),
                        fluidRow(
                            column(6,
-                                  pickerInput(ns("ytype"), "Y axis:", c("RareAbundance","Abundance"))
+                                  pickerInput(ns("ytype"), "Y axis:", c("RareAbundance","Abundance"))%>% 
+                                      shinyInput_label_embed(
+                                          icon("circle-question") %>%
+                                              bs_embed_tooltip(title = "RareAbundance or Abundance")
+                                      )
                            ),
                            column(6,
-                                  pickerInput(ns("xtype"), "X axis:", c("group","sample"))
+                                  pickerInput(ns("xtype"), "X axis:", c("group","sample"))%>% 
+                                      shinyInput_label_embed(
+                                          icon("circle-question") %>%
+                                              bs_embed_tooltip(title = "The x-coordinate is in units of sample or group")
+                                      )
                            )
                        ),
                        numericInput(ns("topn"), "Top most abundant:", value = 10),
@@ -38,7 +46,7 @@ taxa_composition_ui <- function(id) {
                                    tags$b("Whether to show:"),
                                    prettyCheckbox(
                                        inputId = ns("btn_relative"),
-                                       label = "Relative",
+                                       label = "Relative Abundance",
                                        value = TRUE,
                                        status = "danger",
                                        shape = "curve"
@@ -52,6 +60,12 @@ taxa_composition_ui <- function(id) {
                           ),#close tabPanel
                           tabPanel(
                               h5("Color"),
+                              selectInput(inputId = ns('color_pals'),
+                                          label = 'Color scheme',
+                                          choices = c('Color scheme 1' = "col2",
+                                                      "Color scheme 2" = "col3",
+                                                      "Color scheme 3" = "col")
+                              ),
                               fluidRow(
                                   column(6,
                                          uiOutput(ns("color")))
@@ -214,6 +228,17 @@ taxa_composition_mod <- function(id, mpse) {
                 #     #}
                 # }
                 
+                ##get aes(fill) names
+                # color_content <- taxa_name_factor() %>% levels 
+                # print(color_content)
+                # 
+                # ncolors <- color_content %>% length #length of group
+                # color_input <- lapply(seq(ncolors), function (i){
+                #     input[[paste0("colors",i)]]
+                # }) %>% unlist #calling input color 
+                # 
+                # print(color_input)
+                
                 #plot
                 p <- mp %>%
                     mp_plot_abundance(.abundance = !!sym(ytype),
@@ -229,31 +254,27 @@ taxa_composition_mod <- function(id, mpse) {
                         axis.text.x = element_text(size = 11, family = "serif"),
                         axis.text.y = element_text(size = 16, family = "serif"),
                         legend.text = element_text(size = 16, family = "serif")
-                    )
+                    ) #+ scale_fill_manual(values = color_input)
 
                 #########################colors###############################
-                ##color model
-                color_content <- taxa_name_factor() %>% levels %>% sort
+                #color model
+                color_content <- taxa_name_factor()%>% levels
 
-                
                 #add color for group
-                if(color_content %>% is.numeric) {#continuous vector don't call color pal.
-                    return(p)
-                } else {
-                    ncolors <- color_content %>% length #length of group
-                    color_input <- lapply(seq(ncolors), function (i){
-                        input[[paste0("colors",i)]]
-                    }) %>% unlist #calling input color 
-                    names(color_input) <- color_content
-                    
-                    if(length(color_input) != ncolors) {
-                        p
-                    }else{
-                        p <- p +
-                            scale_fill_manual(values = color_input)
-                        
-                    }#close else 2
-                }#close else 1
+                ncolors <- color_content %>% length #length of group
+                color_input <- lapply(seq(ncolors), function (i){
+                    input[[paste0("colors",i)]]
+                }) %>% unlist #calling input color
+
+                #When the Panel is not in color, the value of 'color_input' is 0, 
+                #because colorpickr has not started running
+                if(length(color_input) != ncolors) {
+                    p
+                }else{
+                    p <- p +
+                        scale_fill_manual(values = color_input)
+                }#close else 
+
                 
             # if(is.character(mp_extract_sample(mpse)[[group]])){
             #     if(!is.null(input$items_group)){
@@ -289,8 +310,8 @@ taxa_composition_mod <- function(id, mpse) {
                 #group <- isolate({input$group})
                 ns <- NS(id)
                 #if(!is.numeric(mp_extract_sample(mpse)[[group]])){
-                    name_colors <- taxa_name_factor() %>% levels %>% sort() #getting chr. of group
-                    pal <- get_cols(length(name_colors)) %>% rev #calling color palette:"get_cols"
+                    name_colors <- taxa_name_factor() %>% levels  #getting chr. of group
+                    pal <- get_cols(length(name_colors), input$color_pals) %>% rev #calling color palette:"get_cols"
                     names(pal) <- name_colors #mapping names to colors 
                     #print()
                     picks <- lapply(seq(pal), function(i) {#building multiple color pickers
@@ -337,7 +358,7 @@ taxa_composition_mod <- function(id, mpse) {
                     orderInput(ns('items_group'), 
                                'Boxes order (Drag items below)', 
                                items = group_contents
-                               )
+                                )
                 }
             })
          
@@ -370,9 +391,7 @@ taxa_composition_mod <- function(id, mpse) {
     )
 }
 
-
-
-
+###################The abundance of single bacteria was compared################
 
 # mpse %>%
 #     mp_extract_tree() %>%
@@ -483,44 +502,9 @@ feature_composition_ui <- function(id) {
                            minHeight = 300, maxHeight = 900,
                            minWidth = 300, maxWidth = 1200
                        )
-                   ))
+                   )#close jqui
+                   )#close column
         )
-        # shinydashboardPlus::box(
-        #     width = 12, title = "Taxonomy composition Analysis",
-        #     status = "warning", collapsible = TRUE,
-        #     pickerInput(ns("level"),
-        #                 "Taxonomic level:",
-        #                 choices = NULL),
-        #     pickerInput(ns("feature"), NULL, NULL,
-        #     options = list(`actions-box` = TRUE), multiple = TRUE),
-        #     pickerInput(ns("group"), "Group:", NULL),
-        #     actionButton(ns("btn"), "Submit")
-        # ),
-        # shinydashboardPlus::box(
-        #     width = 12,
-        #     title = "Plot Download",
-        #     status = "success",
-        #     solidHeader = FALSE,
-        #     collapsible = TRUE,
-        #     plotOutput(ns("plot")),
-        #     numericInput(ns("width_slider"), "width:", 10,1, 20),
-        #     numericInput(ns("height_slider"), "height:", 8, 1, 20),
-        #     radioButtons(inputId = ns('extPlot'),
-        #                  label = 'Output format',
-        #                  choices = c('PDF' = '.pdf',"PNG" = '.png','TIFF'='.tiff'),
-        #                  inline = TRUE),
-        #     downloadButton(ns("downloadPlot"), "Download Plot"),
-        #     downloadButton(ns("downloadTable"), "Download Table")
-        # )
-        # fluidRow(),
-        # jqui_resizable(
-        #     plotOutput(ns("plot"), width = "900px"),
-        #     operation = c("enable", "disable", "destroy", "save", "load"),
-        #     options = list(
-        #         minHeight = 300, maxHeight = 900,
-        #         minWidth = 600, maxWidth = 1200
-        #     )
-        # )
     )
     return(res)
 }
@@ -552,29 +536,62 @@ feature_composition_mod <- function(id, mpse) {
                 )
             })
             
-            mp_comp <- eventReactive(input$btn, {
+            mp_feature <- eventReactive(input$btn, {
                 req(inherits(mpse, "MPSE"))
                 input$submit
                 level <- isolate({input$level})
                 group <- isolate({input$group})
                 feature <- isolate({input$feature})
                 mpse %>%
-                    mp_cal_abundance(.abundance=Abundance, action="add", force = T) %>%
+                    mp_cal_abundance(.abundance=RareAbundance, action="add", force = FALSE) %>%
                     mp_extract_tree() %>%
-                    tidyr::unnest(AbundanceBySample) %>%
+                    tidyr::unnest(RareAbundanceBySample) %>%
                     dplyr::filter(nodeClass == level) %>%
                     dplyr::filter(label %in% feature) #%>%
                     #grouped_ggbetweenstats(x = !!sym(group), y = RelAbundanceBySample, grouping.var = label, type = "robust")
             })
 
             p_single_bacteria <- reactive({
-                req(mp_comp())
+                req(mp_feature())
                 input$btn
                 group <- isolate({input$group})
 
-                if (is.numeric(mp_comp()[[group]]) && type == "continuous") {
-                    stop("Does not apply to continuous variables")
-                } else {
+                if (is.numeric(mp_feature()[[group]])) {
+                    #stop("Does not apply to continuous variables")
+                    if(is.null(input$line_color)) {#For continuous variables, there is no input$line_color when plotting for the first time
+                        p <- ggplot(mp_feature(), aes(x = !!sym(group), y = RareAbundance)) +
+                            geom_point(color = "#2c3e50", size = 3, alpha = 0.6) +
+                            geom_smooth(method = "lm", se = T, color = "red",  size = 1.) +
+                            facet_wrap(~ label, scales = "free_y") + 
+                            theme_minimal() +
+                            theme(
+                                text = element_text(family = "Arial"),
+                                plot.title = element_text(hjust = 0.5, face = "bold"),
+                                plot.subtitle = element_text(hjust = 0.5),
+                                axis.title.x = element_text(face = "bold", size = 12),
+                                axis.title.y = element_text(face = "bold", size = 12),
+                                legend.position = "bottom",
+                                legend.title = element_text(face = "bold"),
+                                strip.text = element_text(size = 14, face = "bold")
+                            )#close theme
+                    }else{#Line colors specified by the color palette.
+                        p <- ggplot(mp_feature(), aes(x = !!sym(group), y = RareAbundance)) +
+                            geom_point(color = "#2c3e50", size = 3, alpha = 0.6) +
+                            geom_smooth(method = "lm", se = T, color = input$line_color,  size = 1.) +
+                            facet_wrap(~ label, scales = "free_y") + 
+                            theme_minimal() +
+                            theme(
+                                text = element_text(family = "Arial"),
+                                plot.title = element_text(hjust = 0.5, face = "bold"),
+                                plot.subtitle = element_text(hjust = 0.5),
+                                axis.title.x = element_text(face = "bold", size = 12),
+                                axis.title.y = element_text(face = "bold", size = 12),
+                                legend.position = "bottom",
+                                legend.title = element_text(face = "bold"),
+                                strip.text = element_text(size = 14, face = "bold")
+                            )#close theme
+                    }#close else
+                }else{#Color palette for discrete variables.
                     color_content <- mpse %>% mp_extract_sample %>%
                         select(!!sym(group)) %>% unique #It is a tibble
                     
@@ -584,22 +601,22 @@ feature_composition_mod <- function(id, mpse) {
                     }) %>% unlist #calling input color by length of group 
                     
                     if(length(color_input) != ncolors) {
-                        p <- grouped_ggbetweenstats(mp_comp(),
+                        p <- grouped_ggbetweenstats(mp_feature(),
                                                     plot.type = input$plot.type,
                                                     bf.message = FALSE,
                                                     results.subtitle = input$results.subtitle,
                                                     x = !!sym(group), 
-                                                    y = RelAbundanceBySample, 
+                                                    y = RareAbundance, 
                                                     grouping.var = label, 
                                                     type = "robust")
                         
                     }else{
-                        p <- grouped_ggbetweenstats(mp_comp(),
+                        p <- grouped_ggbetweenstats(mp_feature(),
                                                     plot.type = input$plot.type,
                                                     bf.message = FALSE,
                                                     results.subtitle = input$results.subtitle,
                                                     x = !!sym(group), 
-                                                    y = RelAbundanceBySample, 
+                                                    y = RareAbundance, 
                                                     grouping.var = label, 
                                                     type = "robust",
                                                     ggplot.component = list(
@@ -613,28 +630,39 @@ feature_composition_mod <- function(id, mpse) {
             
             #Modify color
             color_list <- reactive({
-                req(mp_comp())
+                req(mp_feature())
                 input$btn
                 group <- isolate({
                     input$group
                 })
                 ns <- NS(id)
-                color_content <- mpse %>% mp_extract_sample %>% 
-                    select(!!sym(group)) %>% unique #It is a tibble
-                name_colors <- color_content[[1]] %>% sort #getting chr.
-                pal <- pattle_drak2(length(name_colors)) #calling color palette:"pattle_drak2"
-                names(pal) <- name_colors #mapping names to colors 
-                
-                picks <- lapply(seq(pal), function(i) {#building multiple color pickers
-                    colorPickr(
-                        inputId = ns(paste0("colors",i)),
-                        label = names(pal[i]),
-                        selected = pal[[i]],
+                if(!is.numeric(mp_extract_sample(mpse)[[group]])){
+                    color_content <- mpse %>% mp_extract_sample %>% 
+                        select(!!sym(group)) %>% unique #It is a tibble
+                    name_colors <- color_content[[1]] %>% sort #getting chr.
+                    pal <- pattle_drak2(length(name_colors)) #calling color palette:"pattle_drak2"
+                    names(pal) <- name_colors #mapping names to colors 
+                    
+                    picks <- lapply(seq(pal), function(i) {#building multiple color pickers
+                        colorPickr(
+                            inputId = ns(paste0("colors",i)),
+                            label = names(pal[i]),
+                            selected = pal[[i]],
+                            swatches = cols,
+                            theme = "monolith",
+                            useAsButton = TRUE
+                        )#close colorPickr
+                    })#close lapply
+                }else{
+                    picks <- colorPickr(
+                        inputId = ns("line_color"),
+                        label = "Line color",
+                        selected = "red",
                         swatches = cols,
                         theme = "monolith",
                         useAsButton = TRUE
                     )
-                })
+                }#close else
                 return(picks)
             })
             
@@ -652,7 +680,7 @@ feature_composition_mod <- function(id, mpse) {
                 filename = function(){
                     paste("feature_composition", input$extPlot, sep='')},
                 content = function(file){
-                    req(mp_comp())
+                    req(mp_feature())
                     ggsave(file, 
                            plot = p_single_bacteria(), 
                            width = input$width_slider, 
@@ -663,8 +691,8 @@ feature_composition_mod <- function(id, mpse) {
             output$downloadTable <- downloadHandler(
                 filename = function(){ "feature_composition_Data.csv" },
                 content = function(file){
-                    req(mp_comp())
-                    table <- mp_comp()$data
+                    req(mp_feature())
+                    table <- mp_feature()$data
                     n <- names(table)[sapply(table, class) == "list"] 
                     write.csv(table %>% select(-c(n)), 
                               file,

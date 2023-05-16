@@ -169,9 +169,11 @@ ui <- tagList(
     useShinyjs(),
     #includeCSS("www/spinner_style.css"),
     
-    add_busy_spinner(spin = "fulfilling-bouncing-circle",
+    add_busy_spinner(spin = "fading-circle",
                      color = '#2980b9',
                      position = "bottom-right",
+                     onstart = FALSE,
+                     margins = c(70, 120)
                      #position = "top-right", 
                      #margins = c(450,950)
                      ),

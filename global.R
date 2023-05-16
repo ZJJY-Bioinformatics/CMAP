@@ -253,8 +253,7 @@ define_color3 <- c('deepskyblue', 'orange', define_color2)
 
 #Composition bar plot color
 ##Ref: MicrobiotaProcess:::get_cols
-
-get_cols <- function (n) {
+get_cols <- function (n, selected_col = "col3") {
     col <- c("#8dd3c7", "#ffffb3", "#bebada", "#fb8072", "#80b1d3", 
              "#fdb462", "#b3de69", "#fccde5", "#d9d9d9", "#bc80bd", 
              "#ccebc5", "#ffed6f")
@@ -264,7 +263,16 @@ get_cols <- function (n) {
     col3 <- c("#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99", 
               "#e31a1c", "#fdbf6f", "#ff7f00", "#cab2d6", "#6a3d9a", 
               "#ffff99", "#b15928")
-    colorRampPalette(col2)(n)
+    
+    if(selected_col == "col") {
+        colors <- col
+    } else if(selected_col == "col2") {
+        colors <- col2
+    } else {
+        colors <- col3
+    }
+    
+    colorRampPalette(colors)(n)
 }
 
 
