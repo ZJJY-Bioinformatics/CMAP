@@ -22,6 +22,7 @@ source("diff_barplot.R")
 source("alpha_mul_index.R")
 source("adonis.R")
 source("psm.R")
+source("taxa_composition_sample.R")
 #mateG buglist files----------------------
 source("buglist_tSNE.R")
 source("buglist_beta_hcluster.R")
@@ -93,7 +94,8 @@ sidebar <- dashboardSidebar(
         menuItem(
             "Microbiomes Composition",
             icon = icon("bars-staggered"),
-            menuSubItem("Compositions", tabName = "taxa_diff",icon = icon("angle-double-right", verify_fa = FALSE)),
+            menuSubItem("Compositions-Group", tabName = "taxa_diff",icon = icon("angle-double-right", verify_fa = FALSE)),
+            menuSubItem("Compositions-Samples", tabName = "taxa_composition_sample",icon = icon("angle-double-right", verify_fa = FALSE)),
             menuSubItem("Abundance Comparision", tabName = "feature_diff",icon = icon("angle-double-right", verify_fa = FALSE))
             # menuSubItem("Venn/Upset图", tabName = "taxa_diff_venn"),
             # menuSubItem("Heatmap图", tabName = "taxa_diff_heatmap")
@@ -150,7 +152,8 @@ body <- dashboardBody(
         tabItem("diff_bar", diff_barplot_ui("diff_bar")),
         tabItem("a_mul_index", alpha_mul_index_ui("a_mul_index")),
         tabItem("adonis", adonis_all_ui("adonis")),
-        tabItem("psm", psm_ui("psm"))
+        tabItem("psm", psm_ui("psm")),
+        tabItem("taxa_composition_sample", taxa_composition_sample_ui("taxa_composition_sample"))
     )
 )
 

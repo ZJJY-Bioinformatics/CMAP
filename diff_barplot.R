@@ -24,6 +24,14 @@ diff_barplot_ui <- function(id) {
                        fluidRow(
                            column(6,
                                   pickerInput(ns("group"), "Group:", NULL)
+                           ),
+                           column(6,
+                                  pickerInput(ns("level"),
+                                              "Taxonomy level:",
+                                              "all",
+                                              #options = pickerOptions(noneSelectedText = "All"),
+                                              choices = c("all","OTU","Kingdom", "Phylum","Class","Order","Family","Genus","Species"),
+                                              multiple = TRUE)
                            )
                            # column(6,
                            #        pickerInput(ns("level"),
@@ -144,18 +152,19 @@ diff_barplot_mod <- function(id, mpse) {
                 #req(inherits(mp_lefse(), "diffAnalysisClass"))
                 req(inherits(mp_lefse(), "MPSE"))
                 input$btn
+                level <- isolate({input$level})
                 #p <- mp_lefse() %>% ggdiffclade(linewd = 0.1)
-                p <- mp_lefse() %>%
-                    mp_plot_diff_boxplot(
-                        taxa.class = "all", # select the taxonomy level to display
-                        group.abun = TRUE, # display the mean abundance of each group
-                        removeUnknown = TRUE, # whether mask the unknown taxa.
-                    ) %>%
-                    set_diff_boxplot_color(
-                        values = c(define_color3),
-                        guide = guide_legend(title=NULL)
-                    )
-                
+                    p <- mp_lefse() %>%
+                        mp_plot_diff_boxplot(
+                            taxa.class = !!sym(level), # select the taxonomy level to display
+                            group.abun = TRUE, # display the mean abundance of each group
+                            removeUnknown = TRUE, # whether mask the unknown taxa.
+                        ) %>%
+                        set_diff_boxplot_color(
+                            values = c(define_color3),
+                            guide = guide_legend(title=NULL)
+                        )
+ 
                 return(p)
             })
 

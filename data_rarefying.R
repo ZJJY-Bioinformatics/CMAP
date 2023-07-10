@@ -12,6 +12,7 @@ data_rarefy_ui <- function(id) {
                        status = "primary",
                        collapsible = TRUE,
                        p("Rarefied species richness for community ecologists."),
+                       p("If the Rare size is 0, default to rarefying according to the minimum sequence count."),
                        # materialSwitch(ns("rarefying"), 
                        #                value = TRUE,
                        #                label = "Data rarefying",

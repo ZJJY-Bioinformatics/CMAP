@@ -276,5 +276,24 @@ get_cols <- function (n, selected_col = "col3") {
 }
 
 
+#Composition.R for resort sample by Abundance
+resort_p <- function(p, feature) {
+    data <- p$data
+    tax_names <- p$data[[1]] %>% levels
+    p_resort <- p
+
+    if(feature %in% tax_names){
+        
+        factor_level <- data[data[[1]] == feature,] %>%
+            arrange(RareAbundance) %>% select(Sample)
+        
+        p_resort$data$Sample %<>% factor(levels = factor_level[[1]]) 
+        return(p_resort) 
+    }else{
+        return(p)
+    }#close else
+}#close function
+
+
 
 

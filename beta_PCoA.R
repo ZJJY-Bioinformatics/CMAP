@@ -96,7 +96,8 @@ beta_pcoa_ui <- function(id) {
                                    selectInput(inputId = ns('dim'),
                                                label = 'Dimension',
                                                choices = c('PCo1 and PCo2' = "2",
-                                                           "PCo1 and PCo3" = "3")
+                                                           "PCo1 and PCo3" = "3",
+                                                           "PCo2 and PCo3" = "1")
                                    ),
                                    uiOutput(ns("box_order"))
                                    
@@ -222,7 +223,12 @@ beta_pcoa_mod <- function(id, mpse) {
                 })
                 
                 dim_PC <- input$dim %>% as.numeric
-                dim_PC <- c(1, dim_PC)
+                if(dim_PC == 1){
+                    dim_PC <- c(2, 3)
+                }else{
+                    dim_PC <- c(1, dim_PC)
+                }
+                
                 
                 ##color model
                 color_content <- mpse %>%
@@ -234,8 +240,14 @@ beta_pcoa_mod <- function(id, mpse) {
                     data <- mp_pcoa() %>% mp_extract_sample
                     
                     dim_PC <- input$dim %>% as.numeric #2 or 3
-                    x_name <- data[, ncol(data) - 2] %>% names #PC 1
-                    y_name <- data[, ncol(data) + dim_PC - 3] %>% names #PC 2/3
+                    if(dim_PC == 1){
+                        x_name <- data[, ncol(data) - 1] %>% names #PC 2
+                        y_name <- data[, ncol(data)] %>% names #PC 3 
+                    }else{
+                        x_name <- data[, ncol(data) - 2] %>% names #PC 1
+                        y_name <- data[, ncol(data) + dim_PC - 3] %>% names #PC 2/3 
+                    }
+
                     
                     p <- ggplot(data = data, aes(x = !!sym(x_name), 
                                                  y = !!sym(y_name), 
@@ -387,7 +399,7 @@ beta_pcoa_mod <- function(id, mpse) {
                     
                     color_content <- mpse %>% mp_extract_sample %>% 
                         select(!!sym(group)) %>% unique #It is a tibble
-                    name_colors <- color_content[[1]] %>% sort #getting chr.
+                    name_colors <- color_content[[1]] #%>% sort #getting chr.
                     pal <- cc(length(name_colors)) #calling color palette
                     names(pal) <- name_colors #mapping names to colors 
                     

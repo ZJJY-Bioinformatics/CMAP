@@ -85,7 +85,7 @@ filter_mod <- function(id, mpse) {
                 req(inherits(mpse, "MPSE"))
 
                 x <- (mpse_filter$filtered())[["Sample"]]
-                x <- mpse %>% filter(Sample %in% x)
+                #x <- mpse %>% filter(Sample %in% x)
                 return(x)
             })
             

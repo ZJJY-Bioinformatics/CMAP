@@ -379,7 +379,7 @@ beta_nmds_mod <- function(id, mpse) {
                 if(!is.numeric(mp_extract_sample(mpse)[[group]])){
                     color_content <- mpse %>% mp_extract_sample %>% 
                         select(!!sym(group)) %>% unique #It is a tibble
-                    name_colors <- color_content[[1]] %>% sort #getting chr.
+                    name_colors <- color_content[[1]] #%>% sort #getting chr.
                     pal <- cc(length(name_colors)) #calling color palette
                     names(pal) <- name_colors #mapping names to colors 
                     
