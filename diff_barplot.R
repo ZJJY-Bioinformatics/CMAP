@@ -30,7 +30,7 @@ diff_barplot_ui <- function(id) {
                                               "Taxonomy level:",
                                               "all",
                                               #options = pickerOptions(noneSelectedText = "All"),
-                                              choices = c("all","OTU","Kingdom", "Phylum","Class","Order","Family","Genus","Species"),
+                                              choices = c("all","OTU","Kingdom", "Phylum","Class","Order","Family","Genus","Speies"),
                                               multiple = TRUE)
                            )
                            # column(6,

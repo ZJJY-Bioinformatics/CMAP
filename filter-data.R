@@ -26,6 +26,12 @@ filter_ui <- function(id) {
                              "Save Filter Values", 
                              icon = icon("fa-regular fa-pen-to-square"),
                              class = "btn-primary"),
+                # actionButton(ns("DownloadFilter"),
+                #              "Download Table", 
+                #              icon = icon("fa-regular fa-pen-to-square"),
+                #              class = "btn-primary"),
+                downloadButton(ns("DownloadFilter"), "Download Table",
+                                           class = "btn-primary"),
                 br(),
                 tags$h4("Filtered data:"),
                 verbatimTextOutput(outputId = ns("res_str"))
@@ -88,6 +94,15 @@ filter_mod <- function(id, mpse) {
                 #x <- mpse %>% filter(Sample %in% x)
                 return(x)
             })
+            
+            output$DownloadFilter <- downloadHandler(
+                filename = function(){ "Filter_Data.csv" },
+                content = function(file){
+                    table <- mpse_filter$filtered()
+                    write.csv(table, 
+                              file,
+                              row.names = FALSE)
+                })
             
             observeEvent(input$saveFilterButton,{
                 req(inherits(mpse, "MPSE"))

@@ -45,7 +45,7 @@ beta_hcluster_ui <- function(id) {
                     fluidRow(
                         column(width = 6,
                                style=list("padding-right: 5px;"),
-                               pickerInput(ns("taxonomy"), "taxonomy:", NULL)
+                               pickerInput(ns("taxonomy"), "Taxonomy:", NULL)
                         ),
                         column(width = 6,
                                style=list("padding-left: 5px;"),

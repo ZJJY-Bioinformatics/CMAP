@@ -35,11 +35,13 @@ server <- function(input, output, session) {
         diff_barplot_mod("diff_bar", mpse_filtered)
         adonis_all_mod("adonis", mpse_filtered)
         taxa_composition_sample_mod("taxa_composition_sample", mpse_filtered)
+        abu_table_mod("extraction_abu", mpse_filtered)
+        biotype_mod("biotype", mpse_filtered)
       })
     })
   })
   
-  #
+  #Meta-G
   buglist_mpse <- upload_buglist_mod("upload_buglist")
   observe({
     req(buglist_mpse)
@@ -54,8 +56,20 @@ server <- function(input, output, session) {
     buglist_beta_hcluster_mod("buglist_hcluster",buglist_mpse())
     buglist_tSNE_mod("buglist_tsne",buglist_mpse())
   })
-  #other tools
+  
+  #Epide
+  
+  meta_epide <- epide_upload_mod("upload_epide")
+  observe({
+      req(meta_epide())
+      epide_filter <- filter_epide_mod("filter_epide",meta_epide())
+      observeEvent(epide_filter,{
+          descriptive_mod("descriptive_epide",epide_filter())
+      })
+   })
   psm_mod("psm")
+
+  
 }
 
 shinyServer(server)

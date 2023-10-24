@@ -1,0 +1,116 @@
+---
+title: "Microbiota Abundance Analysis Toturial"
+author: |
+  | Lang Zhou
+  | Microbiome Medicine Center, Division of Laboratory Medicine, Zhujiang Hospital
+
+output:
+  prettydoc::html_pretty:
+    theme: architect
+    highlight: github
+    toc: true
+---
+
+**CALM-based Microbiome Analysis Platform (CMAP)** is an interactive app for analysis of Microbiome datasets.
+
+
+## Data Upload and Cleaning
+Analysis can only be performed after completing three steps: **Data Upload, Rarefaction, and Meta Data Filter**.
+
+### Data Upload Instructions
+
+**1.** `Abundance file`:The OTU/ASV table should be in either `.biom` or `.txt` format. The first row (column names) should correspond to the sample names, and each subsequent row should represent the ID (row name) of the OTU/ASV. The last column should be named "taxonomy" and should contain the annotation information for the corresponding OTU/ASV row. Each column should be separated by a tab key (tab-separated format).<br>
+<br>
+**2.** `Meta file`: The metadata is a text file in tab-separated values format that contains information about sample grouping or environmental factors.The first column must be labeled as "#SampleID" and contains unique sample names.Sample names must not be duplicated within the "#SampleID" column.<br>
+<br>
+ **3.** `Tree file (optional)`: Typically with extensions `.tre` or `.nwk`, contains the evolutionary relationships among species. The presence of this file is necessary for conducting analyses involving species evolutionary relationships, such as calculating α-diversity using the PD index or β-diversity using the Unifrac distance. Without this file, analyses that rely on species evolutionary relationships cannot be performed. <br>
+<br>
+**When the Data Preview window displays the data, it indicates that CMAP has successfully read the data.**
+
+<img src="upload_data.gif" alt="How to upload data">
+
+### Rarefaction
+
++ `Rare Size` refers to the specified rarefaction threshold for rarefaction. If it is set to 0, the rarefaction will be performed based on the minimum sequence count.<br>
++ `Trim OTU` refers to whether to remove OTUs from the analysis.<br>
++ `Trim Sample` refers to whether to remove samples with a sequence count less than the "Rare Size" value.<br>
+
+**The visualization on the right side allows you to compare the sample data before and after rarefaction.**
+
+<img src="Rarefaction.gif" alt="Rarefaction">
+
+
+### Meta Data Filter
+
+After filtering the data, it is necessary to click on `Save Filter Values` to save the filtered data.
+
+<img src="Fiter.gif" alt="Filter">
+
+
+## Alpha Diversity
+### Alpha index
+<img src="alpha_index.gif" alt="alpha index">
+
+### Multi-group Comparison
+<img src="multi-group.gif" alt="Multi-group Comparison">
+
+### Rarefaction Curve
+<img src="Curve.gif" alt="Rarefaction Curve">
+
+
+## Beta Diversity
+### PCA/PCoA/NMDS
+<img src="PCA.gif" alt="PCA">
+
+### Adonis
+<img src="Adonis.gif" alt="Adonis">
+
+### Hierarchical Clustering
+<img src="cluster.gif" alt="Hierarchical Clustering">
+
+### t-SNE
+<img src="tSNE.gif" alt="t-SNE">
+
+
+## Microbiomes Composition
+### Compositions-Group
+<img src="comp-group.gif" alt="Compositions-Group">
+
+### Compositions-Samples
+<img src="comp-sample.gif" alt="Compositions-Samples">
+
+### Abundance Comparision
+<img src="abu_compar.gif" alt="Abundance Comparision">
+
+
+## Biomarker Discovery
+### LEfSe
+<img src="lefse.gif" alt="LEfSe">
+
+### Diff-bar plot
+<img src="diff_bar.gif" alt="Diff-bar plot">
+
+### Diff-Abundance plot
+<img src="diff_abu.gif" alt="Diff-Abundance plot">
+
+
+## Multivariable Association
+### CCA/RDA
+<img src="CCA.gif" alt="CCA">
+
+## Vaginal CSTs
+<img src="cst.gif" alt="cst">
+
+
+## Workflow Diagram
+<img src="CMAP_workflow.svg" alt="isolated" width="1000"/>
+
+
+## Instructional video
+For a quick walkthrough have a look a the video below.
+<br>
+
+<video width="640" height="360" controls>
+  <source src="https://user-images.githubusercontent.com/46915370/209632660-3915cf97-54d8-4ea9-9123-22f4426ab3af.mp4" type="video/mp4">
+</video>
+

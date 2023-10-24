@@ -130,6 +130,15 @@
 
 }
 
+
+.disabled-module {
+    text-align: center!important;
+    padding: 1rem;
+    background-color: #ccc; /* 设置为灰色 */
+    /* 可以添加其他样式，如文本颜色、鼠标悬停效果等 */
+}
+
+
 /* section 3: what's new/ indicator updates boxes*/ 
 
 
@@ -251,7 +260,17 @@
   padding:15px;
 }
 
+/* What's new ------------------*/ 
+#whats-new-section .white-box-inner {
+    max-height: 280px; /* you can adjust this value based on your needs */
+    overflow-y: auto;
+}
 
+/* home1 ------------------*/ 
+.scrollable {
+  overflow-y: auto;
+  height: 1000px; /* 根据需要设置滚动条的高度 */
+}
 /* Others: PMS ------------------*/ 
 
 /* PMS about-text  */

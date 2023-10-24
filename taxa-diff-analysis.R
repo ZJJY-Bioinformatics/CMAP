@@ -90,9 +90,10 @@ lefse_ui <- function(id) {
                        options = list(
                            minHeight = 300, maxHeight = 900,
                            minWidth = 300, maxWidth = 1200
-                       )
-                   ))
-        )
+                       )#close
+                   )#close jqui
+            )#close column
+        )#close fluidRow
      
         # shinydashboardPlus::box(
         #     width = 12,

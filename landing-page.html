@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="//use.fontawesome.com/releases/v6.0.0/css/all.css">
 
-<!-- reference to the existing ScotPHO HomePage: https://github.com/Public-Health-Scotland/scotpho-profiles-tool -->
+<!-- reference to the existing ScotPHO HomePage: https://github.com/Public-Health-Scotland/scotpho-profiles-tool  -->
+
+<!--Thanks ScotPHO!-->
 
 <!-- TOP OF HOMEPAGE - BANNER -->
 <div class = "hero">
    <div class = "hero-inner">
       <h1>Welcome to the CMAP</h1>
-      <h2>OneITStore provides computing resources support.</h2>
+      <h2>Vesion: 20230913</h2>
       <button class = "hero-button" onclick="$('li:eq(6) a').tab('show');" role="button">About us <i class="fa-solid fa-circle-info"></i></button>
      <!-- <button class = "hero-button" onclick="$('li:eq(4) a').tab('show');" role="button" id = "explore">Explore indicators <i class="fa-solid fa-magnifying-glass"></i></button> -->
       
@@ -33,9 +35,22 @@
                </div>
             </a>
 
-      <!-- Link to trend tab-->
 
-            <a onclick="$('li:eq(4) a').tab('show');" role="button" class = "featured-item">
+            <a onclick="$('li:eq(3) a').tab('show');" role="button" class = "featured-item">
+               <div class="features-text-section">
+                  <div class="icon-box">
+                     <i class="fas fa-shield-virus fa-3x"></i>
+                  </div>
+                  <h3>Epidemiology</h3>
+                  <p>It involves the study of disease patterns, causes, and their impact on populations.</p>
+                  <div class="fa fa-chevron-right" aria-hidden="true"></div>
+               </div>
+            </a>
+
+
+
+      <!-- Link to data table tab-->
+            <a onclick="$('li:eq(5) a').tab('show');" role="button" class = "featured-item">
                <div class="features-text-section">
                   <div class="icon-box">
                      <i class="fa fa-bacteria fa-3x"></i>
@@ -47,16 +62,17 @@
             </a>
 
       <!-- Link to rank tab-->
-            <a onclick="$('li:eq(5) a').tab('show');" role="button" class = "featured-item">
+            <a onclick="$('li:eq(4) a').tab('show');" role="button" class = "featured-item">
                <div class="features-text-section">
                   <div class="icon-box">
                      <i class="fa fa-dna fa-3x"></i>
                   </div>
-                  <h3>Metagenomics</h3>
-                  <p>Metagenomic gene function analysis, input is HUMAnN 3.0 output files</p>
+                  <h3 style="color: #ccc;">Metagenomics</h3>
+                  <p style="color: #ccc;">Metagenomic gene function analysis, input is HUMAnN 3.0 output files</p>
                   <div class="fa fa-chevron-right" aria-hidden="true"></div>
                </div>
             </a>
+
 
       <!-- Link to inequalities tab-->
             <a onclick="$('li:eq(4) a').tab('show');" role="button" class = "featured-item">
@@ -64,26 +80,14 @@
                   <div class="icon-box">
                      <i class="fa-solid fa-cubes-stacked fa-3x"></i>
                   </div>
-                  <h3>Metabolomics</h3>
-                  <p>Under construction</p>
+                  <h3 style="color: #ccc;">Metabolomics</h3>
+                  <p style="color: #ccc;">Under construction</p>
                   <div class="fa fa-chevron-right" aria-hidden="true"></div>
                </div>
             </a>
 
-      <!-- Link to data table tab-->
-            <a onclick="$('li:eq(4) a').tab('show');" role="button" class = "featured-item">
-               <div class="features-text-section">
-                  <div class="icon-box">
-                     <i class="fas fa-align-center fa-3x"></i>
-                  </div>
-                  <h3>Transcriptome</h3>
-                  <p>Under construction</p>
-                  <div class="fa fa-chevron-right" aria-hidden="true"></div>
-               </div>
-            </a>
       </div>
    </div>
-
 
    <!-- WHATS NEW/INDICATOR UPDATES -->
 <div class = "grey-container">
@@ -107,8 +111,16 @@
          <h3>What's new</h3>
          <hr>
          <div class = "white-box-inner">
+            <h4>Different Barplot Module Optimization [2023-07-03]</h4>
+            <p>We have added a species-level parameter to the module, allowing users to selectively display desired species levels.
+            </p>
+            <hr>
+            <h4>Composition Module Optimization [2023-06-15]</h4>
+            <p>Large samples in the species composition module required excessive computational time. We have redesigned the species composition module to now only require a single computation. Subsequent modifications to graphic settings no longer necessitate recomputation.
+            </p>
+            <hr>
          	<h4>New PSM Module Added [2023-05-10]</h4>
-            <p>We've just added the Propensity Score Matching (PSM) module to enhance data analysis capabilities by reducing selection bias and confounding: 16S -->> Data Processing -->> PSM </a>. 
+            <p>We've just added the Propensity Score Matching (PSM) module to enhance data analysis capabilities by reducing selection bias and confounding: 16S -->> Data Processing -->> PSM.
             </p>
             <hr>
             <h4>Homepage design [2023-04-27]</h4>
