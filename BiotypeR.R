@@ -8,6 +8,7 @@ require(ade4)
 require(fpc)
 require(cluster) #Require cluster package for use of PAM methods
 require(clusterSim)
+require(ggalluvial)
 
 biotyper=function(x, ...) UseMethod("biotyper")
 

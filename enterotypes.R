@@ -81,7 +81,7 @@ biotype_ui <- function(id) {
                    shinydashboard::box(
                        title = "Example Plot",
                        width = NULL,
-                       img(src="biotype.png",
+                       img(src="biotype_plot.png",
                            align = "center",
                            width = "100%")
                    )

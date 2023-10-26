@@ -84,7 +84,7 @@ tSNE_ui <- function(id) {
                    shinydashboard::box(
                        title = "Example Plot",
                        width = NULL,
-                       img(src="tSNE_plot.png",
+                       img(src="tSNE_plot2.png",
                            align = "center",
                            width = "100%")
                    )
